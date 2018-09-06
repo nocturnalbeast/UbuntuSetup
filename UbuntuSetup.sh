@@ -144,16 +144,78 @@ do
 			input_loc="http://input.fontbureau.com/build/?fontSelection=whole&a=0&g=0&i=0&l=0&zero=0&asterisk=0&braces=0&preset=default&line-height=1.2&accept=I+do&email="
 			overpass_loc="https://github.com/RedHatBrand/Overpass/releases/download/3.0.2/overpass-desktop-fonts.zip"
 			google_loc="https://fonts.google.com/download?family=Dosis|Work%20Sans|Nanum%20Gothic|Fira%20Sans|Nunito|Noto%20Serif|PT%20Sans%20Narrow|Arimo|Muli|Roboto%20Mono|PT%20Serif|Titillium%20Web|Playfair%20Display|Lora|Noto%20Sans|Ubuntu|Open%20Sans%20Condensed|Merriweather|PT%20Sans|Roboto%20Slab|Raleway|Slabo%2027px|Source%20Sans%20Pro|Montserrat|Roboto%20Condensed|Oswald|Lato|Open%20Sans|Roboto"
+			
 			#to be done - curl commands and install
+			echo -e "${cyan}Installing Iosevka..."
+			curl --progress-bar -O iosevka.zip iosevka_loc
+			unzip iosevka.zip
+			sudo mkdir /usr/share/fonts/truetype/iosevka
+			sudo cp something/*.ttf /usr/share/fonts/truetype/iosevka
+			sudo chown root:root /usr/share/fonts/truetype/iosevka -R
+			sudo chmod 644 /usr/share/fonts/truetype/iosevka/* -R
+			sudo chmod 755 /usr/share/fonts/truetype/iosevka
+			sudo fc-cache -fv
+			cd ../..
+			rm -rf something
+			
+			echo -e "${cyan}Installing Hack..."
+			curl --progress-bar -O hack.zip hack_loc
+			unzip hack.zip
+			sudo mkdir /usr/share/fonts/truetype/iosevka
+			sudo cp something/*.ttf /usr/share/fonts/truetype/iosevka
+			sudo chown root:root /usr/share/fonts/truetype/iosevka -R
+			sudo chmod 644 /usr/share/fonts/truetype/iosevka/* -R
+			sudo chmod 755 /usr/share/fonts/truetype/iosevka
+			sudo fc-cache -fv
+			cd ../..
+			rm -rf something
+
+			echo -e "${cyan}Installing Input..."
+			curl --progress-bar -O input.zip input_loc
+			unzip input.zip
+			sudo mkdir /usr/share/fonts/truetype/input
+			sudo cp something/*.ttf /usr/share/fonts/truetype/input
+			sudo chown root:root /usr/share/fonts/truetype/input -R
+			sudo chmod 644 /usr/share/fonts/truetype/input/* -R
+			sudo chmod 755 /usr/share/fonts/truetype/input
+			sudo fc-cache -fv
+			cd ../..
+			rm -rf something
+
+			echo -e "${cyan}Installing Overpass..."
+			curl --progress-bar -O overpass.zip overpass_loc
+			unzip overpass.zip
+			sudo mkdir /usr/share/fonts/truetype/overpass
+			sudo cp something/*.ttf /usr/share/fonts/truetype/overpass
+			sudo chown root:root /usr/share/fonts/truetype/overpass -R
+			sudo chmod 644 /usr/share/fonts/truetype/overpass/* -R
+			sudo chmod 755 /usr/share/fonts/truetype/overpass
+			sudo fc-cache -fv
+			cd ../..
+			rm -rf something
+
+			echo -e "${cyan}Installing Google Fonts..."
+			curl --progress-bar -O google.zip google_loc
+			unzip google.zip
+			sudo mkdir /usr/share/fonts/truetype/google
+			sudo cp something/*.ttf /usr/share/fonts/truetype/google
+			sudo chown root:root /usr/share/fonts/truetype/google -R
+			sudo chmod 644 /usr/share/fonts/truetype/google/* -R
+			sudo chmod 755 /usr/share/fonts/truetype/google
+			sudo fc-cache -fv
+			cd ../..
+			rm -rf something
 			;;
 		6) 
 			echo "We have these in stock. Whaddaya need?"
-			echo " ${cyan}a${no_color}: VS Code"
-			echo " ${cyan}b${no_color}: Atom"
-			echo " ${cyan}c${no_color}: Jupyter"
-			echo " ${cyan}d${no_color}: Brackets"
-			echo " ${cyan}e${no_color}: Eclipse"
-			echo " ${cyan}f${no_color}: Android Studio"
+			echo -e " ${cyan}a${no_color}: VS Code"
+			echo -e " ${cyan}b${no_color}: Atom"
+			echo -e " ${cyan}c${no_color}: Jupyter"
+			echo -e " ${cyan}d${no_color}: Brackets"
+			echo -e " ${cyan}e${no_color}: Eclipse"
+			echo -e " ${cyan}f${no_color}: Android Studio"
+			echo -e " ${cyan}f${no_color}: PyCharm Community Edition"
+			echo -e " ${cyan}f${no_color}: Sublime Text"
 
 			read idech
 			case $idech in
@@ -197,23 +259,31 @@ do
 					chmod +x ~/AndroidStudio/bin/studio.sh
 					rm studio.zip 
 					;;
+				g)
+					#to be done - download and install pycharm
+					;;
+				h)
+					#to be done - download and install sublime
+					;;
 
 				*) 
 					echo -e "${red}That doesn't exist! Try again!."
 					;;
 			esac
-			echo -e "${green}Get to coding now!"
-		7) 
+			echo -e "${green}Get to work now!"
+			;;
+		7)
 			#to be done - cursors, icon sets and themes
 			;;
 		8) 
-			sudo su
-			passwd
-			exit
+			sudo passwd root
 			echo -e "${green}Root secured!"
 			;;
 		9) 
-			#to be done - remove snap apps and snapd
+			snap list | awk -F" " '{if ($1 && NR>1) { system("snap remove " $1 " 2>/dev/null") }}'
+			sudo apt purge gnome-software-plugin-snap -qqy
+			sudo apt purge snapd ubuntu-core-launcher squashfs-tools -qqy
+			echo -e "${green}Aw, snap!"
 			;;
 		10) 
 			#uninstall account plugins and account related stuff.

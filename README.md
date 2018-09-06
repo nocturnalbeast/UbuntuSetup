@@ -15,6 +15,14 @@ chmod +x UbuntuSetup.sh
 ./UbuntuSetup.sh
 ```
 
+If you do want to use the TUI version (based on whiptail), run these commands:
+
+```
+cd UbuntuSetup
+chmod +x UbuntuSetup_whiptail.sh
+./UbuntuSetup_whiptail.sh
+```
+
 ## Authors
 
 * **nocturnalbeast** - [nocturnalbeast](https://github.com/nocturnalbeast)
